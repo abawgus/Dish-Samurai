@@ -1,12 +1,13 @@
 #pragma strict
 
+private var shootComponent : ShootComponent;
+
 private var controller : CharacterController;
 
+@script RequireComponent(ShootComponent)
+@script RequireComponent(CharacterController)
+
 var movementSpeed : float;
-var projectileCount : int;
-var projectileCountMax : int;
-var projectile : GameObject;
-var bulletSpeed : float;
 
 private var moveDirection : Vector3 = Vector3.zero; 
 
@@ -29,19 +30,13 @@ function Move () {
 
 function Shoot () {
 	if (Input.GetButtonDown("Shoot")) {
-		if (projectileCount > 0) {
-			var angle : Vector3;
-			angle = transform.rotation * Vector3.left;
-			var spawnLoc = transform.position + angle * 1.1;
-			var projectileObject : GameObject = Instantiate (projectile, spawnLoc, Quaternion.identity);
-			projectileObject.rigidbody.velocity = angle * bulletSpeed;
-			projectileCount--;
-		}
+		shootComponent.Shoot();
 	}
 }
 
 function Start () {
 	controller = GetComponent(CharacterController);
+	shootComponent = GetComponent(ShootComponent);
 }
 
 function Update () {
@@ -49,4 +44,14 @@ function Update () {
 	Turn();
 	Shoot();
 
+}
+
+function Damage(damage : float) {
+	//Destroy(gameObject);
+	if (Input.GetButton("Capture")){
+		Debug.Log("Button Down");
+		shootComponent.TryCatch();
+	} else {
+		Debug.Log("Dead");
+	}
 }
