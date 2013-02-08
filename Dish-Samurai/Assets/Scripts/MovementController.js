@@ -29,18 +29,14 @@ function Move () {
 
 function Shoot () {
 	if (Input.GetButtonDown("Shoot")) {
-		var angle : Vector3;
-		
-		angle = transform.rotation * Vector3.left;
-	
-		var spawnLoc = transform.position + angle * 1.1;
-		
-		var dish : GameObject = Instantiate (projectile, spawnLoc, Quaternion.identity);
-		
-		Debug.Log(transform.rotation);
-		
-		dish.rigidbody.velocity = angle * bulletSpeed;
-		
+		if (projectileCount > 0) {
+			var angle : Vector3;
+			angle = transform.rotation * Vector3.left;
+			var spawnLoc = transform.position + angle * 1.1;
+			var projectileObject : GameObject = Instantiate (projectile, spawnLoc, Quaternion.identity);
+			projectileObject.rigidbody.velocity = angle * bulletSpeed;
+			projectileCount--;
+		}
 	}
 }
 
