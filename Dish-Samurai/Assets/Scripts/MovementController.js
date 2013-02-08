@@ -1,11 +1,11 @@
 #pragma strict
 
+@script RequireComponent(ShootComponent)
 private var shootComponent : ShootComponent;
 
+@script RequireComponent(CharacterController)
 private var controller : CharacterController;
 
-@script RequireComponent(ShootComponent)
-@script RequireComponent(CharacterController)
 
 var movementSpeed : float;
 

@@ -1,5 +1,7 @@
 #pragma strict
 
+@script RequireComponent(Rigidbody)
+
 var damageVal : float;
 
 function OnCollisionEnter(collision : Collision) {
