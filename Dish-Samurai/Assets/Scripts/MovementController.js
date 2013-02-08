@@ -3,9 +3,10 @@
 private var controller : CharacterController;
 
 var movementSpeed : float;
-var turnSpeed : float;
 var projectileCount : int;
 var projectileCountMax : int;
+var projectile : GameObject;
+var bulletSpeed : float;
 
 private var moveDirection : Vector3 = Vector3.zero; 
 
@@ -28,9 +29,18 @@ function Move () {
 
 function Shoot () {
 	if (Input.GetButtonDown("Shoot")) {
-		var spawnLoc = transform.position + transform.forward;
-
-		Instantiate (projectlie, transform.position, Quaternion.identity);
+		var angle : Vector3;
+		
+		angle = transform.rotation * Vector3.left;
+	
+		var spawnLoc = transform.position + angle * 1.1;
+		
+		var dish : GameObject = Instantiate (projectile, spawnLoc, Quaternion.identity);
+		
+		Debug.Log(transform.rotation);
+		
+		dish.rigidbody.velocity = angle * bulletSpeed;
+		
 	}
 }
 
@@ -41,4 +51,6 @@ function Start () {
 function Update () {
 	Move();
 	Turn();
+	Shoot();
+
 }
