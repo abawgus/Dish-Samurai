@@ -43,7 +43,6 @@ function Update () {
 	Move();
 	Turn();
 	Shoot();
-
 }
 
 function Damage(damage : float) {
